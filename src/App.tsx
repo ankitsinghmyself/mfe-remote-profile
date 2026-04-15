@@ -10,7 +10,7 @@ const App: React.FC = () => {
           <h1 className="header-title">User Profile</h1>
           <div className="header-badges">
             <span className="badge primary">Profile Micro Frontend</span>
-            <span className="badge">Port: 3002</span>
+            <span className="badge">Port: https://mfe-remote-profile.vercel.app/</span>
             <span className="badge">Team: User</span>
             <span className="badge">Version: v1.0.0</span>
           </div>
