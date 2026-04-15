@@ -11,7 +11,7 @@ webpackConfig.output.uniqueName = "profile";
 
       webpackConfig.plugins.push(
         new ModuleFederationPlugin({
-          name: "dashboard",
+          name: "profile",
           filename: "remoteEntry.js",
 library: { type: "var", name: "profile" },
           exposes: {
