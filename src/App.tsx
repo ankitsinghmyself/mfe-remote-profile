@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 const App: React.FC = () => {
+  const [darkMode, setDarkMode] = useState(true);
+  const [twoFactor, setTwoFactor] = useState(false);
+  const [notifications, setNotifications] = useState(true);
+  const [emailDigest, setEmailDigest] = useState(false);
+
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleTwoFactor = () => setTwoFactor(!twoFactor);
+  const toggleNotifications = () => setNotifications(!notifications);
+  const toggleEmailDigest = () => setEmailDigest(!emailDigest);
+
+  const handleSessionClick = (session: string) => {
+    console.log(`Navigating to session: ${session}`);
+    // Placeholder for navigation
+  };
+
+  const sessions = [
+    'Dashboard - 2 min ago',
+    'Profile Settings - 1 hour ago',
+    'Team Workspace - 3 hours ago',
+    'Project Review - yesterday'
+  ];
+
   return (
     <div className="profile-app">
       {/* MFE Header */}
@@ -10,7 +32,15 @@ const App: React.FC = () => {
           <h1 className="header-title">User Profile</h1>
           <div className="header-badges">
             <span className="badge primary">Profile Micro Frontend</span>
-            <span className="badge">Port: https://mfe-remote-profile.vercel.app/</span>
+            <a 
+              href="https://mfe-remote-profile.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="badge"
+              aria-label="Open Profile MFE"
+            >
+              Port: https://mfe-remote-profile.vercel.app/
+            </a>
             <span className="badge">Team: User</span>
             <span className="badge">Version: v1.0.0</span>
           </div>
@@ -74,28 +104,28 @@ const App: React.FC = () => {
           <div className="settings-card">
             <h3>⚙️ Preferences</h3>
             <div className="settings-list">
-              <label className="setting-item">
+              <label className="setting-item" onClick={toggleDarkMode} role="switch" aria-checked={darkMode}>
                 <span>Dark Mode</span>
                 <div className="toggle-container">
-                  <div className="toggle-switch active"></div>
+                  <div className={`toggle-switch ${darkMode ? 'active' : ''}`}></div>
                 </div>
               </label>
-              <label className="setting-item">
+              <label className="setting-item" onClick={toggleTwoFactor} role="switch" aria-checked={twoFactor}>
                 <span>Two-Factor Auth</span>
                 <div className="toggle-container">
-                  <div className="toggle-switch"></div>
+                  <div className={`toggle-switch ${twoFactor ? 'active' : ''}`}></div>
                 </div>
               </label>
-              <label className="setting-item">
+              <label className="setting-item" onClick={toggleNotifications} role="switch" aria-checked={notifications}>
                 <span>Notifications</span>
                 <div className="toggle-container">
-                  <div className="toggle-switch active"></div>
+                  <div className={`toggle-switch ${notifications ? 'active' : ''}`}></div>
                 </div>
               </label>
-              <label className="setting-item">
+              <label className="setting-item" onClick={toggleEmailDigest} role="switch" aria-checked={emailDigest}>
                 <span>Email Digest</span>
                 <div className="toggle-container">
-                  <div className="toggle-switch"></div>
+                  <div className={`toggle-switch ${emailDigest ? 'active' : ''}`}></div>
                 </div>
               </label>
             </div>
@@ -106,13 +136,15 @@ const App: React.FC = () => {
         <div className="activity-card">
           <h3>Recent Sessions</h3>
           <div className="sessions-list">
-            {[
-              'Dashboard - 2 min ago',
-              'Profile Settings - 1 hour ago',
-              'Team Workspace - 3 hours ago',
-              'Project Review - yesterday'
-            ].map((session, index) => (
-              <div key={index} className="session-item">
+            {sessions.map((session, index) => (
+              <div 
+                key={index} 
+                className="session-item"
+                onClick={() => handleSessionClick(session)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && handleSessionClick(session)}
+              >
                 <div className="session-dot"></div>
                 <span>{session}</span>
               </div>
@@ -125,3 +157,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+

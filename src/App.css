@@ -41,6 +41,14 @@
   border: 1px solid #bbf7d0;
   background: #dcfce7;
   color: #166534;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.badge:hover {
+  background: #bbf7d0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(22, 101, 52, 0.15);
 }
 
 .badge.primary {
